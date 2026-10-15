@@ -1,0 +1,2 @@
+# ScamGuardAI
+ScamGuardAI
