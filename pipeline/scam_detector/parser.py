@@ -3,10 +3,11 @@ from utils import get_logger, extract_text_from_json
 
 logger = get_logger(__name__)
 
-def parse_llm_output(self, llm_output:str) -> Dict[str,Any]:
-    """
-    Extracts and parse JSON structure from the LLM Output.
-    args:
+class OutputParser():
+    def parse_llm_output(self, llm_output:str) -> Dict[str,Any]:
+        """
+        Extracts and parse JSON structure from the LLM Output.
+        args:
         llm_output: Raw string output from the llm.
 
     Returns:
@@ -16,19 +17,19 @@ def parse_llm_output(self, llm_output:str) -> Dict[str,Any]:
         - intent: str -> Intent of the message sender.
         - risk_factors: List[str] -> List of identified red flags in the message.
     """
-    logger.info("Begin output parsing")
-    parsed_json = extract_text_from_json(llm_output)
+        logger.info("Begin output parsing")
+        parsed_json = extract_text_from_json(llm_output)
 
-    if parsed_json:
-        logger.info("Successfully parsed the LLM output to json")
-        return parsed_json
+        if parsed_json:
+            logger.info("Successfully parsed the LLM output to json")
+            return parsed_json
 
-    else:
-        logger.warning("No JSON found in the LLM output")
-        fallback_results = {
+        else:
+            logger.warning("No JSON found in the LLM output")
+            fallback_results = {
             "label" : "Uncertain",
             "reasoning" : "Could not parse AI response",
             "intent" : "Unknown",
             "risk_factors" : ["Parsing error"]
         }
-        return fallback_results
+            return fallback_results

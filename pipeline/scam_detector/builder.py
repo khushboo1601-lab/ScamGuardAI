@@ -1,4 +1,4 @@
-from llm.prompts import generate_prompt
+from llm.prompt_library.prompts import generate_prompt
 
 def build_prompt(message:str, strategy: str = "react") -> str:
     """
